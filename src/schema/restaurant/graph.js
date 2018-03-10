@@ -12,15 +12,16 @@ export default {
       slug: String!,
     }
     type Query {
-      restaurant(id: ID!): Restaurant
+      restaurant(id: ID, slug: String): Restaurant
     }
     type Mutation {
       createRestaurant(input: RestaurantInput!): Restaurant
     }
   `,
+
   resolvers: {
     Query: {
-      restaurant: (_, { id }) => DAO.findOne({ _id: id }),
+      restaurant: (_, { id, slug }) => DAO.findOne({ $or: [{ _id: id }, { slug }] }),
     },
     Mutation: {
       createRestaurant: (_, { input }) => DAO.create(input),
