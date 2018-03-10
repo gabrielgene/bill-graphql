@@ -3,7 +3,7 @@ import { merge } from 'lodash';
 import { makeExecutableSchema } from 'graphql-tools';
 
 const SchemaDefinition = `
-  schema { query: Query }
+  schema { query: Query, mutation: Mutation }
 `;
 
 const schema = glob.sync(`${__dirname}/!(base)/graph.js`)
