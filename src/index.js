@@ -4,6 +4,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import config from '~/src/config';
+import { connectDB } from '~/src/db';
+
+connectDB();
 
 const app = express();
 app.use(bodyParser.json());
