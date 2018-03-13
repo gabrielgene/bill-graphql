@@ -13,6 +13,10 @@ export default class BaseDAO {
     return this._model.findOne(args).exec();
   }
 
+  static findById(id) {
+    return this._model.findOne({ _id: id }).exec();
+  }
+
   static update(id, args) {
     return this._model.update({ id }, { $set: args });
   }
