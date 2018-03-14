@@ -30,13 +30,13 @@ export default {
 
   resolvers: {
     Query: {
-      table: (_, { id }) => DAO.findOne({ _id: id }),
+      table: (_, { id }) => DAO.findById(id),
     },
     Mutation: {
       createTable: (_, { input }) => DAO.create(input),
     },
     Table: {
-      restaurant: ({ restaurantId }) => RestaurantDAO.findOne({ _id: restaurantId }),
+      restaurant: ({ restaurantId }) => RestaurantDAO.findById(restaurantId),
       sessions: ({ id }) => TableSessionDAO.find({ tableId: id }),
     },
   },

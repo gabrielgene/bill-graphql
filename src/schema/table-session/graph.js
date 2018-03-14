@@ -36,7 +36,7 @@ export default {
 
   resolvers: {
     Query: {
-      tableSession: (_, { id }) => DAO.findOne({ _id: id }),
+      tableSession: (_, { id }) => DAO.findById(id),
     },
     Mutation: {
       createTableSession: async (_, { input }) => {
@@ -47,8 +47,8 @@ export default {
       closeTableSession: (_, { id, closedAt }) => DAO.update(id, { closedAt }),
     },
     TableSession: {
-      restaurant: ({ restaurantId }) => RestaurantDAO.findOne({ _id: restaurantId }),
-      table: ({ tableId }) => TableDAO.findOne({ _id: tableId }),
+      restaurant: ({ restaurantId }) => RestaurantDAO.findById(restaurantId),
+      table: ({ tableId }) => TableDAO.findById(tableId),
     },
   },
 };
