@@ -7,6 +7,7 @@ export default class TableSessionDAO extends BaseDAO {
     numberOfPeople: Number,
     openedAt: Date,
     closedAt: Date,
+    payments: [Number],
     tableId: { index: true, type: Schema.Types.ObjectId, ref: 'Table' },
     restaurantId: { index: true, type: Schema.Types.ObjectId, ref: 'Restaurant' },
   }));

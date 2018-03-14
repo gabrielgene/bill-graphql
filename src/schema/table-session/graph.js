@@ -12,6 +12,7 @@ export default {
       numberOfPeople: Int,
       openedAt: Date,
       closedAt: Date,
+      payments: [Float],
 
       table: Table,
       restaurant: Restaurant,
@@ -24,13 +25,18 @@ export default {
       numberOfPeople: Int,
     }
 
+    input TableSessionPatchInput {
+      payments: [Float],
+      closedAt: Date,
+    }
+
     extend type Query {
       tableSession(id: ID!): TableSession
     }
 
     extend type Mutation {
       createTableSession(input: TableSessionInput!): TableSession
-      closeTableSession(id: ID!, closedAt: Date): TableSession
+      updateTableSession(id: ID!, patch: TableSessionPatchInput!): Boolean
     }
   `,
 
@@ -44,7 +50,7 @@ export default {
         invariant(!!table, 'Entity.NOT_FOUND(Table)');
         return DAO.create({ ...input, restaurantId: table.restaurantId });
       },
-      closeTableSession: (_, { id, closedAt }) => DAO.update(id, { closedAt }),
+      updateTableSession: (_, { id, patch }) => DAO.update(id, patch).then(() => true),
     },
     TableSession: {
       restaurant: ({ restaurantId }) => RestaurantDAO.findById(restaurantId),
