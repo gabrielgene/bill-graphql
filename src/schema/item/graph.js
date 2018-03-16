@@ -1,5 +1,6 @@
 import DAO from './dao';
 import RestaurantDAO from '~/src/schema/restaurant/dao';
+import CategoryDAO from '~/src/schema/category/dao';
 
 export default {
   type: `
@@ -10,12 +11,14 @@ export default {
       price: String,
 
       restaurant: Restaurant,
+      category: Category,
       image: Image,
     }
 
     input ItemInput {
       name: String!,
       restaurantId: ID!,
+      categoryId: ID!,
       description: String!,
       price: Float!,
       image: ImageInput,
@@ -23,6 +26,7 @@ export default {
 
     input ItemPatchInput {
       name: String,
+      categoryId: ID,
       description: String,
       price: Float,
       image: ImageInput,
@@ -35,6 +39,7 @@ export default {
     extend type Mutation {
       createItem(input: ItemInput!): Item
       updateItem(id: ID!, patch: ItemPatchInput!): Boolean
+      bulkUpdateItem(ids: [ID]!, patch: ItemPatchInput!): Boolean
     }
   `,
 
@@ -46,10 +51,12 @@ export default {
     Mutation: {
       createItem: (_, { input }) => DAO.create(input),
       updateItem: (_, { id, patch }) => DAO.update(id, patch),
+      bulkUpdateItem: (_, { ids, patch }) => DAO.bulkUpdate(ids, patch),
     },
 
     Item: {
       restaurant: ({ restaurantId }) => RestaurantDAO.findById(restaurantId),
+      category: ({ categoryId }) => CategoryDAO.findById(categoryId),
     },
   },
 };

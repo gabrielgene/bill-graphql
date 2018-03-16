@@ -17,8 +17,12 @@ export default class BaseDAO {
     return this._model.findOne({ _id: id }).exec();
   }
 
-  static async update(id, args) {
+  static update(id, args) {
     return this._model.update({ _id: id }, { $set: args });
+  }
+
+  static bulkUpdate(ids, args) {
+    return this._model.update({ _id: { $in: ids } }, { $set: args }, { multi: true });
   }
 
   static remove(args) {

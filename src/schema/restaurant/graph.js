@@ -2,6 +2,7 @@ import DAO from './dao';
 import TableDAO from '~/src/schema/table/dao';
 import TableSessionDAO from '~/src/schema/table-session/dao';
 import ItemDAO from '~/src/schema/item/dao';
+import CategoryDAO from '~/src/schema/category/dao';
 
 export default {
   type: `
@@ -13,6 +14,7 @@ export default {
       tables: [Table],
       tablesSessions: [TableSession],
       items: [Item],
+      categories: [Category],
     }
     input RestaurantInput {
       name: String!,
@@ -40,6 +42,7 @@ export default {
       tablesSessions: ({ id }) =>
         TableSessionDAO.find({ restaurantId: id }),
       items: ({ id }) => ItemDAO.find({ restaurantId: id }),
+      categories: ({ id }) => CategoryDAO.find({ restaurantId: id }),
     },
   },
 };
