@@ -10,6 +10,7 @@ export default {
       price: String,
 
       restaurant: Restaurant,
+      image: Image,
     }
 
     input ItemInput {
@@ -17,6 +18,14 @@ export default {
       restaurantId: ID!,
       description: String!,
       price: Float!,
+      image: ImageInput,
+    }
+
+    input ItemPatchInput {
+      name: String,
+      description: String,
+      price: Float,
+      image: ImageInput,
     }
 
     extend type Query {
@@ -25,6 +34,7 @@ export default {
 
     extend type Mutation {
       createItem(input: ItemInput!): Item
+      updateItem(id: ID!, patch: ItemPatchInput!): Boolean
     }
   `,
 
@@ -35,6 +45,7 @@ export default {
 
     Mutation: {
       createItem: (_, { input }) => DAO.create(input),
+      updateItem: (_, { id, patch }) => DAO.update(id, patch),
     },
 
     Item: {
