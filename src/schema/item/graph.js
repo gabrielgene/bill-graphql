@@ -9,6 +9,7 @@ export default {
       name: String,
       description: String,
       price: String,
+      isAdditional: Boolean,
 
       restaurant: Restaurant,
       category: Category,
@@ -22,6 +23,7 @@ export default {
       description: String!,
       price: Float!,
       image: ImageInput,
+      isAdditional: Boolean,
     }
 
     input ItemPatchInput {

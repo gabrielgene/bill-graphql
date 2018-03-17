@@ -10,6 +10,7 @@ export default class ItemDAO extends BaseDAO {
     description: String,
     price: Number,
     image: Image,
+    isAdditional: Boolean,
   }));
 }
 

@@ -27,7 +27,7 @@ export default {
 
     extend type Mutation {
       createCategory(input: CategoryInput!): Category
-      updateCategory(id: ID!, patch: CategoryPatchInput!): Category
+      updateCategory(id: ID!, patch: CategoryPatchInput!): Boolean
     }
   `,
 
