@@ -1,6 +1,6 @@
 import DAO from './dao';
 import RestaurantDAO from '~/src/schema/restaurant/dao';
-import CategoryDAO from '~/src/schema/category/dao';
+import ItemCategoryDAO from '~/src/schema/item-category/dao';
 
 export default {
   type: `
@@ -12,7 +12,7 @@ export default {
       isAdditional: Boolean,
 
       restaurant: Restaurant,
-      category: Category,
+      category: ItemCategory,
       image: Image,
     }
 
@@ -58,7 +58,7 @@ export default {
 
     Item: {
       restaurant: ({ restaurantId }) => RestaurantDAO.findById(restaurantId),
-      category: ({ categoryId }) => CategoryDAO.findById(categoryId),
+      category: ({ categoryId }) => ItemCategoryDAO.findById(categoryId),
     },
   },
 };

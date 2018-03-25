@@ -10,7 +10,7 @@ export default {
       slug: String,
 
       restaurant: Restaurant,
-      sessions: [TableSession],
+      openSessions: [TableSession],
     }
 
     input TableInput {
@@ -37,7 +37,10 @@ export default {
     },
     Table: {
       restaurant: ({ restaurantId }) => RestaurantDAO.findById(restaurantId),
-      sessions: ({ id }) => TableSessionDAO.find({ tableId: id }),
+      openSessions: ({ id }) => TableSessionDAO.find({
+        tableId: id,
+        closedAt: null,
+      }),
     },
   },
 };

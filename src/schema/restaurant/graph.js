@@ -13,6 +13,7 @@ export default {
       id: ID!,
       name: String,
       slug: String,
+      flyerUrl: String,
 
       tables: [Table],
       tablesSessions: [TableSession],
@@ -22,26 +23,32 @@ export default {
     }
 
     input RestaurantInput {
-      name: String!,
-      slug: String!,
+      name: String!
+      slug: String!
+      flyerUrl: String!
+      categoriesIds: [String]!
     }
 
     extend type Query {
       restaurant(id: ID, slug: String): Restaurant
+      restaurants(query: String): [Restaurant]
     }
 
     extend type Mutation {
       createRestaurant(input: RestaurantInput!): Restaurant
+      updateRestaurant(id: ID!, patch: RestaurantInput): Boolean
     }
   `,
 
   resolvers: {
     Query: {
       restaurant: (_, { id, slug }) => DAO.findOne({ $or: [{ _id: id }, { slug }] }),
+      restaurants: (_, { query }) => DAO.search(query),
     },
 
     Mutation: {
       createRestaurant: (_, { input }) => DAO.create(input),
+      updateRestaurant: (_, { id, patch }) => DAO.update(id, patch),
     },
 
     Restaurant: {

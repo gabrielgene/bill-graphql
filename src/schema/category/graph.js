@@ -8,12 +8,10 @@ export default {
       id: ID!,
       name: String,
 
-      restaurant: Restaurant,
-      items: [Item],
+      restaurants: [Restaurant],
     }
 
     input CategoryInput {
-      restaurantId: ID!,
       name: String!,
     }
 
@@ -40,8 +38,7 @@ export default {
       updateCategory: (_, { id, patch }) => DAO.update(id, patch).then(() => true),
     },
     Category: {
-      restaurant: ({ restaurantId }) => RestaurantDAO.findById(restaurantId),
-      items: ({ id }) => ItemDAO.find({ categoryId: id }),
+      restaurants: ({ id }) => RestaurantDAO.findByCategory(id),
     },
   },
 };
