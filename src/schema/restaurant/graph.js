@@ -15,6 +15,8 @@ export default {
       name: String
       slug: String
       flyerUrl: String
+      address: String
+      googleMapsUrl: String
 
       tables: [Table]
       tablesSessions: [TableSession]
@@ -29,6 +31,8 @@ export default {
       slug: String!
       flyerUrl: String!
       categoriesIds: [String]!
+      address: String!
+      googleMapsUrl: String
     }
 
     input RestaurantPatchInput {
@@ -36,6 +40,8 @@ export default {
       slug: String
       flyerUrl: String
       categoriesIds: [String]
+      address: String
+      googleMapsUrl: String
     }
 
     extend type Query {

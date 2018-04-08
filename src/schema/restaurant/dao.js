@@ -7,6 +7,8 @@ export default class RestaurantDAO extends BaseDAO {
     categories: [{ index: true, type: Schema.ObjectId, ref: 'RestaurantCategory' }],
     name: String,
     flyerUrl: String,
+    address: String,
+    googleMapsUrl: String,
   }));
 
   static search(term) {
