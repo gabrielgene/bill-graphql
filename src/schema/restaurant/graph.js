@@ -1,25 +1,27 @@
 import { pickBy, identity } from 'lodash';
 
 import DAO from './dao';
+import RestaurantCategoryDAO from '~/src/schema/restaurant-category/dao';
+import ItemCategoryDAO from '~/src/schema/item-category/dao';
 import TableDAO from '~/src/schema/table/dao';
 import TableSessionDAO from '~/src/schema/table-session/dao';
 import ItemDAO from '~/src/schema/item/dao';
-import CategoryDAO from '~/src/schema/category/dao';
 import OrderDAO from '~/src/schema/order/dao';
 
 export default {
   type: `
     type Restaurant {
-      id: ID!,
-      name: String,
-      slug: String,
-      flyerUrl: String,
+      id: ID!
+      name: String
+      slug: String
+      flyerUrl: String
 
-      tables: [Table],
-      tablesSessions: [TableSession],
-      categories: [Category],
-      items(category: ID): [Item],
-      orders(status: OrderStatus): [Order],
+      tables: [Table]
+      tablesSessions: [TableSession]
+      categories: [RestaurantCategory]
+      itemCategories: [ItemCategory]
+      items(category: ID): [Item]
+      orders(status: OrderStatus): [Order]
     }
 
     input RestaurantInput {
@@ -62,7 +64,8 @@ export default {
       tables: ({ id }) => TableDAO.find({ restaurantId: id }),
       tablesSessions: ({ id }) =>
         TableSessionDAO.find({ restaurantId: id }),
-      categories: ({ id }) => CategoryDAO.find({ restaurantId: id }),
+      categories: ({ id }) => RestaurantCategoryDAO.find({ restaurantId: id }),
+      itemCategories: ({ id }) => ItemCategoryDAO.find({ restaurantId: id }),
       items: ({ id }, { category }) =>
         ItemDAO.find(pickBy({ restaurantId: id, categoryId: category }, identity)),
       orders: ({ id }, { status }) =>
