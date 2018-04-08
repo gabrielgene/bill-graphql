@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "npm run build",
+    "build": "npm run clean && npm run build:server",
+    "clean": "rm -rf dist/ && mkdir dist/",
+    "build:server": "./node_modules/.bin/babel src -d dist",
     "dev": "nodemon src/index.js --exec babel-node",
     "start": "node src/index.js --exec babel-node"
   },
