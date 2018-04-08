@@ -29,6 +29,13 @@ export default {
       categoriesIds: [String]!
     }
 
+    input RestaurantPatchInput {
+      name: String
+      slug: String
+      flyerUrl: String
+      categoriesIds: [String]
+    }
+
     extend type Query {
       restaurant(id: ID, slug: String): Restaurant
       restaurants(query: String): [Restaurant]
@@ -36,7 +43,7 @@ export default {
 
     extend type Mutation {
       createRestaurant(input: RestaurantInput!): Restaurant
-      updateRestaurant(id: ID!, patch: RestaurantInput): Boolean
+      updateRestaurant(id: ID!, patch: RestaurantPatchInput): Boolean
     }
   `,
 
