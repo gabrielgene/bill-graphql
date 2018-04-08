@@ -21,6 +21,7 @@ export default {
 
     extend type Query {
       category(id: ID!): Category
+      categories: [Category]
     }
 
     extend type Mutation {
@@ -32,6 +33,7 @@ export default {
   resolvers: {
     Query: {
       category: (_, { id }) => DAO.findById(id),
+      categories: () => DAO.find(),
     },
     Mutation: {
       createCategory: (_, { input }) => DAO.create(input),
