@@ -13,6 +13,7 @@ export default {
     type Restaurant {
       id: ID!
       name: String
+      description: String
       slug: String
       flyerUrl: String
       address: String
@@ -28,6 +29,7 @@ export default {
 
     input RestaurantInput {
       name: String!
+      description: String
       slug: String!
       flyerUrl: String!
       categoriesIds: [String]!
@@ -37,6 +39,7 @@ export default {
 
     input RestaurantPatchInput {
       name: String
+      description: String
       slug: String
       flyerUrl: String
       categoriesIds: [String]
