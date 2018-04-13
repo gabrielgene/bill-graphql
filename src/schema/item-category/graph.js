@@ -41,7 +41,7 @@ export default {
     },
     ItemCategory: {
       restaurant: ({ restaurantId }) => RestaurantDAO.findById(restaurantId),
-      items: ({ id }) => ItemDAO.find({ itemCategoryId: id }),
+      items: ({ id }) => ItemDAO.find({ categoryId: id }),
     },
   },
 };
