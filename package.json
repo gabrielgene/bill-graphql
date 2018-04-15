@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm run build",
+    "postinstall": "npm run build",
     "build": "npm run clean && npm run build:server",
     "clean": "rm -rf dist/ && mkdir dist/",
     "build:server": "./node_modules/.bin/babel src -d dist",
