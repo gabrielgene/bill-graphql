@@ -58,6 +58,7 @@ export default {
     extend type Mutation {
       createRestaurant(input: RestaurantInput!): Restaurant
       updateRestaurant(id: ID!, patch: RestaurantPatchInput): Boolean
+      importRestaurant(input: JSON!): Boolean
     }
   `,
 
@@ -70,6 +71,35 @@ export default {
     Mutation: {
       createRestaurant: (_, { input }) => DAO.create(input),
       updateRestaurant: (_, { id, patch }) => DAO.update(id, patch),
+      importRestaurant: async (_, { input }) => {
+        const { categoryName, itemCategories, ...restaurantArgs } = input;
+
+        const restaurantCategory =
+          await RestaurantCategoryDAO.findOne({ name: categoryName })
+          || await RestaurantCategoryDAO.create({ name: categoryName });
+
+        const restaurant = await DAO.create({
+          categoryId: restaurantCategory.id,
+          ...restaurantArgs,
+        });
+
+        await Promise.all(itemCategories.map(async ({ name, items }) => {
+          const category = await ItemCategoryDAO.create({
+            restaurantId: restaurant.id,
+            name,
+          });
+
+          return Promise.all(items.map(
+            i => ItemDAO.create({
+              ...i,
+              restaurantId: restaurant.id,
+              categoryId: category.id,
+            })
+          ));
+        }));
+
+        return true;
+      },
     },
 
     Restaurant: {

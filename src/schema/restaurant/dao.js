@@ -1,16 +1,18 @@
 import mongoose, { Schema } from 'mongoose';
 import BaseDAO from '~/src/schema/base/dao';
+import Image from '~/src/schema/image/schema';
 
 export default class RestaurantDAO extends BaseDAO {
   static _model = mongoose.model('Restaurant', new mongoose.Schema({
-    slug: { index: true, type: String, unique: true },
-    categoriesIds: [{ index: true, type: Schema.ObjectId, ref: 'RestaurantCategory' }],
+    slug: { index: true, type: String, unique: true, slug: 'name' },
+    categoryId: { index: true, type: Schema.ObjectId, ref: 'RestaurantCategory' },
     name: String,
     description: String,
-    flyerUrl: String,
+    flyer: Image,
     address: String,
-    googleMapsUrl: String,
     workingHours: [[[Number]]],
+    googleMapsUrl: String,
+    iFoodUrl: String,
   }));
 
   static search(term) {
