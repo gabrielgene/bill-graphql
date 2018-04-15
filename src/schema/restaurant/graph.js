@@ -22,7 +22,7 @@ export default {
 
       tables: [Table]
       tablesSessions: [TableSession]
-      categories: [RestaurantCategory]
+      category: RestaurantCategory
       itemCategories: [ItemCategory]
       items(category: ID): [Item]
       orders(status: OrderStatus): [Order]
@@ -33,7 +33,7 @@ export default {
       description: String
       slug: String!
       flyerUrl: String!
-      categoriesIds: [String]!
+      categoryId: String!
       address: String!
       googleMapsUrl: String
       workingHours: [[[Int]]]
@@ -44,7 +44,7 @@ export default {
       description: String
       slug: String
       flyerUrl: String
-      categoriesIds: [String]
+      categoryId: String
       address: String
       googleMapsUrl: String
       workingHours: [[[Int]]]
@@ -106,7 +106,7 @@ export default {
       tables: ({ id }) => TableDAO.find({ restaurantId: id }),
       tablesSessions: ({ id }) =>
         TableSessionDAO.find({ restaurantId: id }),
-      categories: ({ id }) => RestaurantCategoryDAO.find({ restaurantId: id }),
+      category: ({ id }) => RestaurantCategoryDAO.find({ restaurantId: id }),
       itemCategories: ({ id }) => ItemCategoryDAO.find({ restaurantId: id }),
       items: ({ id }, { category }) =>
         ItemDAO.find(pickBy({ restaurantId: id, categoryId: category }, identity)),

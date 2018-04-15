@@ -21,6 +21,6 @@ export default class RestaurantDAO extends BaseDAO {
   }
 
   static findByCategory(categoryId) {
-    return this.find({ categoriesIds: categoryId });
+    return this.find({ categoryId });
   }
 }
