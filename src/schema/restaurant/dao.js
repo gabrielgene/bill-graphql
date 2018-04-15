@@ -10,6 +10,7 @@ export default class RestaurantDAO extends BaseDAO {
     flyerUrl: String,
     address: String,
     googleMapsUrl: String,
+    workingHours: [[[Number]]],
   }));
 
   static search(term) {

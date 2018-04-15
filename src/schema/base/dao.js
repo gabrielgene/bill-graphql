@@ -29,4 +29,3 @@ export default class BaseDAO {
     return this._model.find(args).remove().exec();
   }
 }
-

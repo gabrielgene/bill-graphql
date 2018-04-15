@@ -18,6 +18,7 @@ export default {
       flyerUrl: String
       address: String
       googleMapsUrl: String
+      workingHours: [[[Int]]]
 
       tables: [Table]
       tablesSessions: [TableSession]
@@ -35,6 +36,7 @@ export default {
       categoriesIds: [String]!
       address: String!
       googleMapsUrl: String
+      workingHours: [[[Int]]]
     }
 
     input RestaurantPatchInput {
@@ -45,6 +47,7 @@ export default {
       categoriesIds: [String]
       address: String
       googleMapsUrl: String
+      workingHours: [[[Int]]]
     }
 
     extend type Query {
