@@ -15,7 +15,7 @@ export default {
       name: String
       description: String
       slug: String
-      flyerUrl: String
+      flyer: Image
       address: String
       googleMapsUrl: String
       workingHours: [[[Int]]]
@@ -32,7 +32,7 @@ export default {
       name: String!
       description: String
       slug: String!
-      flyerUrl: String!
+      flyer: ImageInput!
       categoryId: String!
       address: String!
       googleMapsUrl: String
@@ -43,7 +43,7 @@ export default {
       name: String
       description: String
       slug: String
-      flyerUrl: String
+      flyer: ImageInput
       categoryId: String
       address: String
       googleMapsUrl: String
